@@ -25,7 +25,7 @@ For modifying this app, everyone has better to know these things first:
 
   - NativeModule
   
-- `react-native-windows`_
+- `react-native-windows <https://github.com/Microsoft/react-native-windows/>`_
 - `react-redux <https://github.com/reactjs/react-redux>`_
 .. - `CodePush <https://github.com/Microsoft/react-native-code-push>`_
 
