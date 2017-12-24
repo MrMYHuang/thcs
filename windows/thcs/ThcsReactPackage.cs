@@ -4,12 +4,12 @@ using ReactNative.UIManager;
 using System;
 using System.Collections.Generic;
 
-namespace taa
+namespace thcs
 {
     /// <summary>
     /// Package defining basic modules and view managers.
     /// </summary>
-    public class TaaReactPackage : IReactPackage
+    public class ThcsReactPackage : IReactPackage
     {
         /// <summary>
         /// Creates the list of native modules to register with the react

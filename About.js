@@ -18,12 +18,10 @@
 var React = require('react');
 var ReactNative = require('react-native');
 var {
-  Image,
+  ScrollView,
   Platform,
   StyleSheet,
   Text,
-  TouchableHighlight,
-  TouchableNativeFeedback,
   View,
   Linking
 } = ReactNative;
@@ -37,45 +35,46 @@ import { connect } from "react-redux"
   };
 })
 class About extends React.Component {
+  static navigationOptions= {
+    title: '關於'
+  }
+
   render() {
     const { animalDbDate } = this.props;
     return (
-      <View>
+      <ScrollView>
 {(__DEV__) ? <Text>開發模式</Text> : null}
-<Text>{`*版本歷史：
-1.4.1:
-  * 解決有時"我的最愛"的列表項目按鈕非"刪除"的bug。
-1.4.0:
-  * 新增"我的最愛"功能。
-1.3.1:
-  * 修正資料庫下載進度條顯示問題。
-1.3.0:
-  * 新增下載資料庫會顯示進度。
-  * 修正更新進度有可能不顯示的問題。
-1.2.2:
-  * 修正下載更新完成對話窗重複出現的bug。
-1.2.0:
-  * CodePush更新會顯示確認視窗與下載進度。
-1.1.0:
-  * 支援CodePush更新app。
-  * 修正"下載資料庫"鈕無法更新資料庫的問題。
-  * 關於頁面顯示上次下載資料之時間。
-1.0.8：
-  * 第一版。`}</Text>
+<Text style={styles.text}>{`* 版本歷史：
+0.1.0：
+  * 第一版。
+
+* 作者的話：
+  1. 此app設計主要目的為改善各醫院"即時看診號"網頁的內容呈現，但對內容正確性、即時性一律不負任何責任。若不接受，請勿使用此app。
+  2. 因各醫院的"即時看診號"網頁格式不一致，再加上人力有限的情形，所以此app預計只支援有提供以下特定格式"即時看診號"網頁：
+    * 所有診間的看診號列於一張網頁。
+    * 以表格形式呈現。
+    * 可由單一網址公開存取。(不可要求輸入任何登入資訊)
+  其餘網頁格式未來可能會以原網頁的方式呈現。
+  3. 若想建議本app支援更多醫院，請先查明第2點所述之限制。若符合其要求，請來信至作者信箱，就有機會加入此app。
+  `}</Text>
         <Text />
-        <Text>* 作者：Meng-Yuan Huang</Text>
-        <Text>* 作者信箱：<HyperLink>mailto:myhDev@live.com</HyperLink></Text>
+        <Text style={styles.text}>* 作者：Meng-Yuan Huang</Text>
+        <Text style={styles.text}>* 作者信箱：<HyperLink>mailto:myhDev@live.com</HyperLink></Text>
+      </ScrollView>
+    );
+  }
+  /*
         <Text>* App開放原始碼：<HyperLink>https://github.com/MrMYHuang/taa</HyperLink></Text>
         <Text>* 版權宣告：</Text>
         <Text>  動物資料來源：<HyperLink>http://data.gov.tw/node/9842</HyperLink></Text>
         <Text>  動物資料庫下載日期：{animalDbDate}</Text>
-        <Text>  Logo來源：<HyperLink>http://www.freepik.com</HyperLink></Text>
-      </View>
-    );
-  }
+        <Text>  Logo來源：<HyperLink>http://www.freepik.com</HyperLink></Text>*/
 }
 
 var styles = StyleSheet.create({
+  text: {
+    fontSize: 24
+  },
   imgContainer: {
     flex: 1,
   },

@@ -39,12 +39,12 @@ var AnimalScreen = require('./AnimalScreen');
  * In case you want to use the Rotten Tomatoes' API on a real app you should
  * create an account at http://developer.rottentomatoes.com/
  */
-var API_URL = 'http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx'
 
 var LOADING = {};
 
-import { NativeModules } from 'react-native'
-import { SaveStoreFile } from './StoreFile'
+//import { NativeModules } from 'react-native'
+//import { SaveStoreFile } from './StoreFile'
+var getClinicStatus = require('./clinicStatus')
 import axios from 'axios'
 
 import { connect } from "react-redux"
@@ -62,6 +62,10 @@ var animalFile = 'Animals.json'
   };
 })
 class ListScreen extends React.Component {
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: navigation.state.params.hospital.name
+  })
+
   timeoutID = null
 
   constructor(props) {
@@ -86,14 +90,15 @@ class ListScreen extends React.Component {
   animals = []
 
   async initScreen() {
+    /*
     if (await NativeModules.NativeLocalFile.FileExistAsync(animalFile)) {
       var aDbStr = await NativeModules.NativeLocalFile.LoadStrAsync(animalFile)
       this.animals = JSON.parse(aDbStr)
       this.showRandomList()
     }
-    else {
+    else {*/
       await this.updateDb()
-    }
+    //}
   }
 
   async updateDb() {
@@ -109,96 +114,38 @@ class ListScreen extends React.Component {
       }
     }
 
-    await axios.get(API_URL, config)
+    const {state} = this.props.navigation
+    var hospital = state.params.hospital
+    
+    await axios.get(hospital.clinicStatusUrl, config)
       .then(async (res) => {
+        /*
         await NativeModules.NativeLocalFile.SaveStrAsync(animalFile, JSON.stringify(res.data)).catch(err => {
           console.log('Fail to save file.')
         })
-
+        */
+        
         var currTime = new Date()
         await this.props.dispatch({
           type: "SET_KEY_VAL",
           key: "animalDbDate",
           val: currTime.toLocaleDateString() + " " + currTime.toLocaleTimeString()
         })
-        await SaveStoreFile(this.props.store)
-        this.animals = res.data
+        //await SaveStoreFile(this.props.store)
+        var clinics = getClinicStatus(hospital, res.data)
+        this.animals = clinics.toArray()
         this.showRandomList()
         this.setState({ isDownloading: false })
       })
   }
 
   showRandomList() {
-    var animalIds = this.getRandAnimals()
-    var dispAnimals = []
-    for (var i = 0; i < animalIds.length; i++) {
-      dispAnimals.push(this.animals[animalIds[i]])
-    }
-    this.setState({ listType: 0, dataSource: this.state.dataSource.cloneWithRows(dispAnimals) })
-  }
-
-  showFavorites() {
-    const favorites = this.props.favorites
-    this.setState({ listType: 1 })
-    if (favorites == undefined) {
-      this.setState({ dataSource: this.state.dataSource.cloneWithRows([]) })
-      return
-    }
-
-    var dispAnimals = []
-    for (var i = 0; i < favorites.length; i++) {
-      for (var j = 0; j < this.animals.length; j++) {
-        if (this.animals[j]['animal_id'] == favorites[i]) {
-          dispAnimals.push(this.animals[j])
-          continue
-        }
-      }
-    }
-    this.setState({ dataSource: this.state.dataSource.cloneWithRows(dispAnimals) })
-  }
-
-  getRandAnimals(): Array<any> {
-    var animalIds = []
-    var dispNum = Math.min(10, this.animals.length)
-    for (var i = 0; i < dispNum; i++) {
-
-      var randNum = Math.random() * this.animals.length
-      animalIds.push(Math.floor(randNum))
-    }
-    return animalIds;
+    this.setState({ listType: 0, dataSource: this.state.dataSource.cloneWithRows(this.animals) })
   }
 
   selectAnimal(animal: Object) {
     const title = '流水編號：' + animal.animal_id
-    if (Platform.OS === 'ios') {
-      this.props.navigator.push({
-        title: title,
-        component: AnimalScreen,
-        passProps: { animal },
-      });
-    } else {
-      dismissKeyboard();
-      this.props.navigator.push({
-        title: title,
-        name: 'animal',
-        animal: animal,
-      });
-    }
-  }
-
-  go2about() {
-    if (Platform.OS === 'ios') {
-      this.props.navigator.push({
-        title: '關於',
-        component: AnimalScreen,
-      });
-    } else {
-      dismissKeyboard();
-      this.props.navigator.push({
-        title: '關於',
-        name: 'about'
-      });
-    }
+    this.props.navigation.navigate("Animal", {animal: animal})
   }
 
   renderFooter() {
@@ -235,7 +182,6 @@ class ListScreen extends React.Component {
         onSelect={() => this.selectAnimal(animal)}
         onHighlight={() => highlightRowFunc(sectionID, rowID)}
         onUnhighlight={() => highlightRowFunc(null, null)}
-        updateFavoList={() => this.showFavorites.bind(this)()}
         animal={animal}
         listType={this.state.listType}
       />
@@ -265,10 +211,7 @@ class ListScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.buttonRow}>
-          <Button style={styles.button} title='下載資料庫' onPress={this.updateDb.bind(this)} />
-          <Button style={styles.button} title='與我有緣' onPress={this.showRandomList.bind(this)} />
-          <Button style={styles.button} title='我的最愛' onPress={this.showFavorites.bind(this)} />
-          <Button style={styles.button} title='關於' onPress={this.go2about.bind(this)} />
+          <Button style={styles.button} title='刷新' onPress={this.updateDb.bind(this)} />
         </View>
         <View style={styles.container2}>
           {content}

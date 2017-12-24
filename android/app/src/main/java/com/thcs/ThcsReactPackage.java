@@ -1,4 +1,4 @@
-package com.taa;
+package com.thcs;
 
 /**
  * Created by myh on 3/3/2017.
@@ -14,12 +14,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TaaReactPackage implements ReactPackage {
+public class ThcsReactPackage implements ReactPackage {
 
+    /*
     @Override
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
+    protected List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
-    }
+    }*/
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {

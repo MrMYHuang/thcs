@@ -13,7 +13,7 @@ import { NativeModules } from 'react-native'
 
 var blankStore = createStore(reducer, middleware)
 
-var storeFile = 'TaaSettings.json'
+var storeFile = 'ThcsSettings.json'
 exports.getSavedStore = async () => {
     if (await NativeModules.NativeLocalFile.FileExistAsync(storeFile)) {
         var savedStore = await LoadStoreFile()

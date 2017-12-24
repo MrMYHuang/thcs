@@ -11,10 +11,9 @@
  * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @providesModule AnimalsAdoptionApp
+ * @providesModule Main
  * @flow
  */
-'use strict';
 
 var React = require('react');
 var ReactNative = require('react-native');
@@ -22,69 +21,36 @@ var {
     Platform,
     AppRegistry,
     BackAndroid,
-    Navigator,
     StyleSheet,
     View,
     Text,
     Alert,
 } = ReactNative;
-import codePush from "react-native-code-push";
 
-var AnimalScreen = require('./AnimalScreen');
-var ListScreen = require('./ListScreen');
-var TitleBarWindows =  require('./TitleBarWindows')
+import {
+    TabNavigator
+  } from 'react-navigation';
+
+//import codePush from "react-native-code-push";
+
+var HomeScreen = require('./HomeScreen');
 var About = require('./About');
 
 import { Provider } from "react-redux"
 import { getSavedStore, blankStore } from "./store"
 
-var _navigator;
-BackAndroid.addEventListener('hardwareBackPress', () => {
-    if (_navigator && _navigator.getCurrentRoutes().length > 1) {
-        _navigator.pop();
-        return true;
-    }
-    return false;
-});
-
-var RouteMapper = function (route, navigationOperations, onComponentRef) {
-    _navigator = navigationOperations;
-    if (route.name === 'search') {
-        return (
-            <ListScreen navigator={navigationOperations} />
-        );
-    }
-    else if (route.name === 'about') {
-        return (
-            <View style={{ flex: 1 }}>
-                <TitleBarWindows
-                    onPress={navigationOperations.pop}
-                    style={styles.toolbar}
-                    title={"關於"} />
-                <About
-                    style={{ flex: 1 }}
-                    navigator={navigationOperations}
-                    animal={route.animal}
-                />
-            </View>
-        )
-    }
-    else if (route.name === 'animal') {
-        return (
-            <View style={{ flex: 1 }}>
-                <TitleBarWindows
-                    onPress={navigationOperations.pop}
-                    style={styles.toolbar}
-                    title={route.title} />
-                <AnimalScreen
-                    style={{ flex: 1 }}
-                    navigator={navigationOperations}
-                    animal={route.animal}
-                />
-            </View>
-        );
-    }
-};
+const MainNavigator = TabNavigator ({
+    Home: {screen: HomeScreen},
+    About: {screen: About}
+  }, {
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+        labelStyle: {
+          fontSize: 24,
+        }
+    },
+    lazy: true
+  });
 
 var styles = StyleSheet.create({
     container: {
@@ -110,8 +76,7 @@ switch(Platform.OS ) {
         ProgressBar = require('ProgressBarAndroid'); break
 }
 
-
-class AnimalsAdoptionApp extends React.Component {
+export class Main extends React.Component {
     savedStore = {}
 
     constructor(props) {
@@ -164,16 +129,10 @@ class AnimalsAdoptionApp extends React.Component {
         if (!this.state.storeInited)
             return <Text>Loading...</Text>
 
-        var initialRoute = { name: 'search' };
         return (
             <Provider store={this.savedStore}>
                 <View style={styles.container}>
-                    <Navigator
-                        style={styles.navigator}
-                        initialRoute={initialRoute}
-                        configureScene={() => Navigator.SceneConfigs.FadeAndroid}
-                        renderScene={RouteMapper}
-                    />
+                <MainNavigator />
                     {this.state.showUpdateBar && <ProgressBar style={styles.toolbar} progress={this.state.updateProgress} />}
                 </View>
             </Provider>
@@ -181,11 +140,28 @@ class AnimalsAdoptionApp extends React.Component {
     }
 };
 
-if (!(__DEV__)) {
+/*
+export class Main2 extends React.Component {
+    
+        constructor(props) {
+            super(props);
+        }
+    
+        render() {
+    
+            return (
+                <Text>a</Text>
+            );
+        }
+    };
+    */
+
+/*
+//if (!(__DEV__)) {
     let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START, updateDialog: codePush.DEFAULT_UPDATE_DIALOG };
-    AnimalsAdoptionApp = codePush(codePushOptions)(AnimalsAdoptionApp);
-}
+    Main = codePush(codePushOptions)(Main);
+//}
+*/
+//AppRegistry.registerComponent('thcs', () => Main);
 
-AppRegistry.registerComponent('taa', () => AnimalsAdoptionApp);
-
-module.exports = AnimalsAdoptionApp;
+//module.exports = Main;

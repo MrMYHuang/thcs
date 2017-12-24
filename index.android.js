@@ -21,8 +21,9 @@
  * @providesModule AnimalsAdoptionApp
  * @flow
  */
-'use strict';
 
-var Main = require('./Main');
+import {AppRegistry} from 'react-native'
+import {Main} from './Main'
 
-module.exports = Main;
+AppRegistry.registerComponent('thcs', () => Main);
+//module.exports = Main;

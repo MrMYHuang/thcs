@@ -32,60 +32,18 @@ var getStyleFromScore = require('./getStyleFromScore');
 var getTextFromScore = require('./getTextFromScore');
 
 
-var dispFields = ["性別", "年紀", "開放認養時間(起)", "所屬收容所名稱", "異動時間"]
+var dispFields = ["醫生"]
 
 
-var keys = ["animal_sex", "animal_age", "animal_opendate", "shelter_name", "cDate"]
+var keys = ["doctor"]
 
 import { connect } from "react-redux"
-import { SaveStoreFile } from './StoreFile'
 @connect((store) => {
   return {
-    store: store,
-    favorites: store.settings.favorites
+    store: store
   };
 })
 class AnimalCell extends React.Component {
-  async modifyFavorites(addDel, animalId) {
-    let newFavorites
-    let oldFavorites: Array<any> = this.props.favorites
-
-    let oldId
-    // Init add
-    if (oldFavorites === undefined) {
-      newFavorites = [animalId]
-    }
-    else {
-      oldId = oldFavorites.indexOf(animalId)
-      // Add
-      if (addDel == 0) {
-        // Check duplicate.
-        if (oldId !== -1)
-          return
-
-        newFavorites = [animalId]
-        newFavorites = newFavorites.concat(oldFavorites)
-      }
-      // Del
-      else if (addDel == 1) {
-        oldFavorites.splice(oldId, 1)
-        newFavorites = oldFavorites
-      }
-    }
-
-    await this.props.dispatch({
-      type: "SET_KEY_VAL",
-      key: "favorites",
-      val: newFavorites
-    })
-    console.log(this.props.store)
-    await SaveStoreFile(this.props.store)
-
-    if (addDel) {
-      this.props.updateFavoList()
-    }
-  }
-
   render() {
     var rows = [];
     for (var i = 0; i < keys.length; i++) {
@@ -105,23 +63,11 @@ class AnimalCell extends React.Component {
             onShowUnderlay={this.props.onHighlight}
             onHideUnderlay={this.props.onUnhighlight}>
             <View style={styles.row}>
-              <View style={styles.imgContainer}>
-                <Image
-                  source={{ uri: this.props.animal.album_file }}
-                  style={styles.cellImage}
-                  resizeMode='contain'
-                />
-              </View>
               <View style={styles.textContainer}>
                 {rows}
               </View>
             </View>
           </TouchableElement>
-        </View>
-        <View style={{ flex: 1 }}>
-          <Button
-            title={this.props.listType ? '-' : '+'}
-            onPress={async () => this.modifyFavorites.bind(this)(this.props.listType, this.props.animal.animal_id)} />
         </View>
       </View>
     );
@@ -129,6 +75,9 @@ class AnimalCell extends React.Component {
 }
 
 var styles = StyleSheet.create({
+  text: {
+    fontSize: 64
+  },
   imgContainer: {
     flex: 1,
   },

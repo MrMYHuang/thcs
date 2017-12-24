@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 
-var storeFile = 'TaaSettings.json'
+var storeFile = 'ThcsSettings.json'
 exports.SaveStoreFile = async function (store) {
     await NativeModules.NativeLocalFile.SaveStrAsync(storeFile, JSON.stringify(store))
 }
