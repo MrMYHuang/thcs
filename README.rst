@@ -27,7 +27,7 @@ For modifying this app, everyone has better to know these things first:
   
 - `react-native-windows <https://github.com/Microsoft/react-native-windows/>`_
 - `react-redux <https://github.com/reactjs/react-redux>`_
-.. - `CodePush <https://github.com/Microsoft/react-native-code-push>`_
+- `CodePush <https://github.com/Microsoft/react-native-code-push>`_
 
 Recommended Tools:
 

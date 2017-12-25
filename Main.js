@@ -27,11 +27,11 @@ var {
     Alert,
 } = ReactNative;
 
+const  CodePush = require("react-native").NativeModules.CodePush;
 import {
     TabNavigator
   } from 'react-navigation';
 
-//import codePush from "react-native-code-push";
 
 var HomeScreen = require('./HomeScreen');
 var About = require('./About');
@@ -100,20 +100,20 @@ export class Main extends React.Component {
     codePushStatusDidChange(status) {
         switch (status) {
             /*
-            case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+            case CodePush.SyncStatus.CHECKING_FOR_UPDATE:
               console.log("Checking for updates.");
               break;
-            case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+            case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
               console.log("Downloading package.");
               break;
-            case codePush.SyncStatus.INSTALLING_UPDATE:
+            case CodePush.SyncStatus.INSTALLING_UPDATE:
               console.log("Installing update.");
               break;
-            case codePush.SyncStatus.UP_TO_DATE:
+            case CodePush.SyncStatus.UP_TO_DATE:
               console.log("Up-to-date.");
               break;
             */
-            case codePush.SyncStatus.UPDATE_INSTALLED:
+            case CodePush.SyncStatus.UPDATE_INSTALLED:
                 Alert.alert("下載更新完成", "請重新啟動app。")
                 break;
         }
@@ -156,12 +156,12 @@ export class Main2 extends React.Component {
     };
     */
 
-/*
-//if (!(__DEV__)) {
-    let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START, updateDialog: codePush.DEFAULT_UPDATE_DIALOG };
-    Main = codePush(codePushOptions)(Main);
-//}
-*/
+
+if (!(__DEV__)) {
+    let codePushOptions = { checkFrequency: CodePush.CheckFrequency.ON_APP_START, updateDialog: CodePush.DEFAULT_UPDATE_DIALOG };
+    Main = CodePush(codePushOptions)(Main);
+}
+
 //AppRegistry.registerComponent('thcs', () => Main);
 
 //module.exports = Main;
