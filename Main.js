@@ -27,7 +27,8 @@ var {
     Alert,
 } = ReactNative;
 
-const  CodePush = require("react-native").NativeModules.CodePush;
+var CodePush = require("react-native-code-push");
+
 import {
     TabNavigator
   } from 'react-navigation';
@@ -157,10 +158,10 @@ export class Main2 extends React.Component {
     */
 
 
-if (!(__DEV__)) {
+//if (!(__DEV__)) {
     let codePushOptions = { checkFrequency: CodePush.CheckFrequency.ON_APP_START, updateDialog: CodePush.DEFAULT_UPDATE_DIALOG };
     Main = CodePush(codePushOptions)(Main);
-}
+//}
 
 //AppRegistry.registerComponent('thcs', () => Main);
 

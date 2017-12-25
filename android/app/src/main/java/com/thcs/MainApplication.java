@@ -35,7 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
                 cpKey = "YourDeployKey";
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
-                    new CodePush(cpKey, getApplicationContext(), BuildConfig.DEBUG),
+                    new CodePush(cpKey, MainApplication.this, BuildConfig.DEBUG),
                     new ThcsReactPackage()
             );
     }
