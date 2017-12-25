@@ -63,15 +63,14 @@ class About extends React.Component {
         <Text />
         <Text style={styles.text}>* 作者：Meng-Yuan Huang</Text>
         <Text style={styles.text}>* 作者信箱：<HyperLink>mailto:myhDev@live.com</HyperLink></Text>
+        <Text style={styles.text}>* App開放原始碼：<HyperLink>https://github.com/MrMYHuang/thcs</HyperLink></Text>
       </ScrollView>
     );
   }
   /*
-        <Text>* App開放原始碼：<HyperLink>https://github.com/MrMYHuang/taa</HyperLink></Text>
         <Text>* 版權宣告：</Text>
         <Text>  動物資料來源：<HyperLink>http://data.gov.tw/node/9842</HyperLink></Text>
-        <Text>  動物資料庫下載日期：{animalDbDate}</Text>
-        <Text>  Logo來源：<HyperLink>http://www.freepik.com</HyperLink></Text>*/
+        <Text>  動物資料庫下載日期：{animalDbDate}</Text>*/
 }
 
 var styles = StyleSheet.create({
