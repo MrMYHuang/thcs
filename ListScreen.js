@@ -83,9 +83,6 @@ class ListScreen extends React.Component {
     this.initScreen()
   }
 
-  componentDidMount() {
-  }
-
   async initScreen() {
     /*
     if (await NativeModules.NativeLocalFile.FileExistAsync(animalFile)) {
