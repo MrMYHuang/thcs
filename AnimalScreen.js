@@ -23,7 +23,10 @@ var {
   StyleSheet,
   Text,
   View,
+  TouchableHighlight,
 } = ReactNative;
+
+import styles from './styles'
 
 var getStyleFromScore = require('./getStyleFromScore');
 var getTextFromScore = require('./getTextFromScore');
@@ -43,44 +46,33 @@ class AnimalScreen extends React.Component {
   static navigationOptions = {
     headerTitle: '詳細資訊'
   }
-  
+
   render() {
-    const {contentFontSize} = this.props.store.settings
-    const {state} = this.props.navigation;
+    const { contentFontSize, clinics, clinicNoSel } = this.props.store.settings
+    const { updateDb } = this.props.navigation.state.params;
+
     var rows = [];
-    for (var i = 0; i < keys.length; i++) {
-      rows.push(<Text key={i} style={{fontSize: contentFontSize}}> {dispFields[i] + "：" + state.params.animal[keys[i]]}</Text>);
+    for (var c = 0; c < clinics.length; c++) {
+      if (clinics[c].clinicNo == clinicNoSel) {
+        for (var i = 0; i < keys.length; i++) {
+          rows.push(<Text key={i} style={{ fontSize: contentFontSize }}> {dispFields[i] + "：" + clinics[c][keys[i]]}</Text>);
+        }
+        break
+      }
     }
 
     return (
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        <View style={styles.rightPane}>
+      <ScrollView contentContainerStyle={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
           {rows}
         </View>
+        <TouchableHighlight style={styles.button}
+          onPress={updateDb}>
+          <Text style={styles.text}>刷新</Text>
+        </TouchableHighlight>
       </ScrollView>
     );
   }
 }
-
-var styles = StyleSheet.create({
-  contentContainer: {
-    padding: 10,
-  },
-  mainSection: {
-    flex: 2,
-  },
-  detailsImage: {
-    height: 300,
-    backgroundColor: '#eaeaea',
-    marginRight: 10,
-  },
-  rightPane: {
-    justifyContent: 'space-between',
-    flex: 1
-  },
-  text: {
-    fontSize: 64
-  }
-});
 
 module.exports = AnimalScreen;

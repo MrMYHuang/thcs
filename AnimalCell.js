@@ -47,7 +47,7 @@ class AnimalCell extends React.Component {
     var { contentFontSize } = this.props.store.settings
     var rows = [];
     for (var i = 0; i < keys.length; i++) {
-      rows.push(<Text key={i} style={[{ fontSize: contentFontSize }, styles.itemText]}>{this.props.animal[keys[i]]}</Text>);
+      rows.push(<Text key={i} style={[{ fontSize: contentFontSize }, styles.itemText]}>{this.props.clinic[keys[i]]}</Text>);
     }
 
     var TouchableElement = TouchableHighlight;

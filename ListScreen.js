@@ -86,8 +86,6 @@ class ListScreen extends React.Component {
   componentDidMount() {
   }
 
-  animals = []
-
   async initScreen() {
     /*
     if (await NativeModules.NativeLocalFile.FileExistAsync(animalFile)) {
@@ -132,19 +130,30 @@ class ListScreen extends React.Component {
         })
         //await SaveStoreFile(this.props.store)
         var clinics = getClinicStatus(hospital, res.data)
-        this.animals = clinics.toArray()
+        await this.props.dispatch({
+          type: "SET_KEY_VAL",
+          key: "clinics",
+          val: clinics.toArray()
+        })
         this.showRandomList()
         this.setState({ isDownloading: false })
       })
   }
 
   showRandomList() {
-    this.setState({ listType: 0, dataSource: this.state.dataSource.cloneWithRows(this.animals) })
+    this.setState({ listType: 0,
+      dataSource: this.state.dataSource.cloneWithRows(
+        this.props.store.settings.clinics
+      ) })
   }
 
-  selectAnimal(animal: Object) {
-    const title = '流水編號：' + animal.animal_id
-    this.props.navigation.navigate("Animal", { animal: animal })
+  async selectAnimal(clinicNo: Object) {
+    await this.props.dispatch({
+      type: "SET_KEY_VAL",
+      key: "clinicNoSel",
+      val: clinicNo
+    })
+    this.props.navigation.navigate("Animal", { updateDb: this.updateDb.bind(this) })
   }
 
   renderFooter() {
@@ -171,17 +180,17 @@ class ListScreen extends React.Component {
   }
 
   renderRow(
-    animal: Object,
+    clinic: Object,
     sectionID: number | string,
     rowID: number | string,
     highlightRowFunc: (sectionID: ?number | string, rowID: ?number | string) => void,
   ) {
     return (
       <AnimalCell
-        onSelect={() => this.selectAnimal(animal)}
+        onSelect={() => this.selectAnimal(clinic.clinicNo)}
         onHighlight={() => highlightRowFunc(sectionID, rowID)}
         onUnhighlight={() => highlightRowFunc(null, null)}
-        animal={animal}
+        clinic={clinic}
         listType={this.state.listType}
       />
     );

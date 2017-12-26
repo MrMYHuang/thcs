@@ -10,7 +10,7 @@ Download THCS App from Stores
 THCS app is built and published to Google Play Store and Windows Store. Download links:
 
 - `THCS on Google Play Store <https://play.google.com/store/apps/details?id=com.thcs>`_
-.. - `THCS on Windows Store <https://www.microsoft.com/store/apps/9ph0cq23zks5>`_
+- `THCS on Windows Store <https://www.microsoft.com/store/apps/9N5D3PRWQ05G>`_
 
 About Source Files
 =============================
