@@ -50,20 +50,16 @@ class AnimalCell extends React.Component {
       rows.push(<Text key={i} style={[{ fontSize: contentFontSize }, styles.itemText]}>{this.props.clinic[keys[i]]}</Text>);
     }
 
-    var TouchableElement = TouchableHighlight;
-    if (Platform.OS === 'android') {
-      TouchableElement = TouchableNativeFeedback;
-    }
     return (
-      <TouchableElement
-        style={{ flex: 3 }}
+      <TouchableHighlight
+        style={{ flex: 1 }}
         onPress={this.props.onSelect}
         onShowUnderlay={this.props.onHighlight}
         onHideUnderlay={this.props.onUnhighlight}>
         <View style={styles.listRow}>
           {rows}
         </View>
-      </TouchableElement>
+      </TouchableHighlight>
     );
   }
 }

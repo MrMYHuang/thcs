@@ -11,10 +11,10 @@ module.exports = (hospital, html) => {
         var tds = $('td', tr)
         
         return {
-          clinicNo: $(tds.get(hospital.csFieldIds[0])).text(),
-          division: $(tds.get(hospital.csFieldIds[1])).text(),
-          doctor: $(tds.get(hospital.csFieldIds[2])).text(),
-          visitNo: $(tds.get(hospital.csFieldIds[3])).text()
+          clinicNo: $(tds.get(hospital.csFieldIds[0])).text().replace(/^\s+|\s+$/g, ""),
+          division: $(tds.get(hospital.csFieldIds[1])).text().replace(/^\s+|\s+$/g, ""),
+          doctor: $(tds.get(hospital.csFieldIds[2])).text().replace(/^\s+|\s+$/g, ""),
+          visitNo: $(tds.get(hospital.csFieldIds[3])).text().replace(/^\s+|\s+$/g, "")
         }
     })
     clinics.splice(0, 1)

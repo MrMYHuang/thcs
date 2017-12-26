@@ -45,6 +45,10 @@ class About extends React.Component {
       <ScrollView>
 {(__DEV__) ? <Text>開發模式</Text> : null}
 <Text style={styles.text}>{`* 版本歷史：
+1.0.0:
+  * 改善UI。
+  * 新增"設定"頁。
+
 0.2.0:
   * 支援CodePush方式更新app。
 
