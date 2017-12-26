@@ -17,6 +17,7 @@
 
 var React = require('react');
 var ReactNative = require('react-native');
+import styles from './styles'
 var {
   ActivityIndicator,
   ListView,
@@ -24,14 +25,13 @@ var {
   StyleSheet,
   Text,
   View,
-  Button,
+  TouchableHighlight,
 } = ReactNative;
 
 var invariant = require('fbjs/lib/invariant');
 var dismissKeyboard = require('dismissKeyboard');
 
 var AnimalCell = require('./AnimalCell');
-var AnimalScreen = require('./AnimalScreen');
 //var SearchBar = require('SearchBar');
 
 /**
@@ -57,13 +57,12 @@ var animalFile = 'Animals.json'
 @connect((store) => {
   return {
     store: store,
-    animalDbDate: store.settings.animalDbDate,
-    favorites: store.settings.favorites
+    settings: store.settings
   };
 })
 class ListScreen extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
-    title: navigation.state.params.hospital.name
+    headerTitle: navigation.state.params.hospital.name
   })
 
   timeoutID = null
@@ -97,7 +96,7 @@ class ListScreen extends React.Component {
       this.showRandomList()
     }
     else {*/
-      await this.updateDb()
+    await this.updateDb()
     //}
   }
 
@@ -114,9 +113,9 @@ class ListScreen extends React.Component {
       }
     }
 
-    const {state} = this.props.navigation
+    const { state } = this.props.navigation
     var hospital = state.params.hospital
-    
+
     await axios.get(hospital.clinicStatusUrl, config)
       .then(async (res) => {
         /*
@@ -124,7 +123,7 @@ class ListScreen extends React.Component {
           console.log('Fail to save file.')
         })
         */
-        
+
         var currTime = new Date()
         await this.props.dispatch({
           type: "SET_KEY_VAL",
@@ -145,7 +144,7 @@ class ListScreen extends React.Component {
 
   selectAnimal(animal: Object) {
     const title = '流水編號：' + animal.animal_id
-    this.props.navigation.navigate("Animal", {animal: animal})
+    this.props.navigation.navigate("Animal", { animal: animal })
   }
 
   renderFooter() {
@@ -154,7 +153,7 @@ class ListScreen extends React.Component {
       return <View style={styles.scrollSpinner} />;
     }*/
 
-    return <ActivityIndicator style={styles.scrollSpinner} />;
+    return <ActivityIndicator style={styles2.scrollSpinner} />;
   }
 
   renderSeparator(
@@ -162,9 +161,9 @@ class ListScreen extends React.Component {
     rowID: number | string,
     adjacentRowHighlighted: boolean
   ) {
-    var style = styles.rowSeparator;
+    var style = styles2.rowSeparator;
     if (adjacentRowHighlighted) {
-      style = [style, styles.rowSeparatorHide];
+      style = [style, styles2.rowSeparatorHide];
     }
     return (
       <View key={'SEP_' + sectionID + '_' + rowID} style={style} />
@@ -190,11 +189,11 @@ class ListScreen extends React.Component {
 
   render() {
     var content
-    if (this.state.isDownloading == 1)
+    if (this.state.isDownloading == true)
       content = <View style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: 'center' }}>
-        <Text>資料庫下庫進度：</Text>
+        <Text style={styles.text}>資料庫下庫進度：</Text>
         <ProgressBar style={{ height: 50 }} progress={this.state.downloadPercent} />
-        <Text>{Math.round(this.state.downloadedSize / 1024)} / {Math.round(this.state.downloadTotal / 1024)} KB</Text>
+        <Text style={styles.text}>{Math.round(this.state.downloadedSize / 1024)} / {Math.round(this.state.downloadTotal / 1024)} KB</Text>
       </View>
     else
       content = <ListView
@@ -208,16 +207,22 @@ class ListScreen extends React.Component {
         showsVerticalScrollIndicator={false}
       />;
 
+    var { contentFontSize } = this.props.store.settings
     return (
-      <View style={styles.container}>
-        <View style={styles.buttonRow}>
-          <Button style={styles.button} title='刷新' onPress={this.updateDb.bind(this)} />
-        </View>
-        <View style={styles.container2}>
+      < View style={styles2.container} >
+        <View style={styles2.container2}>
+          <View style={styles.listRow}>
+            <Text style={[{ fontSize: contentFontSize }, styles.itemText]}>醫生</Text>
+            <Text style={[{ fontSize: contentFontSize }, styles.itemText]}>看診號</Text>
+          </View>
           {content}
         </View>
-      </View>
-    );
+        <TouchableHighlight style={styles.button}
+          onPress={this.updateDb.bind(this)}>
+          <Text style={styles.text}>刷新</Text>
+        </TouchableHighlight>
+      </View >
+    )
   }
 };
 
@@ -241,35 +246,21 @@ class NoAnimals extends React.Component {
     }
 
     return (
-      <View style={[styles.container, styles.centerText]}>
-        <Text style={styles.noAnimalsText}>{text}</Text>
+      <View style={styles2.container}>
+        <Text style={styles2.noAnimalsText}>{text}</Text>
       </View>
     );
   }
 }
 
-var styles = StyleSheet.create({
+var styles2 = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
   },
   container2: {
-    flex: 5,
+    flex: 1,
     backgroundColor: 'white',
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  button: {
-    flex: 2,
-    margin: 5,
-    width: 200,
-    fontSize: 50
-  },
-  centerText: {
-    alignItems: 'center',
   },
   noAnimalsText: {
     marginTop: 80,

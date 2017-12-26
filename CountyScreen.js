@@ -8,6 +8,7 @@ var {
     TouchableHighlight
 } = ReactNative;
 
+import styles from './styles'
 const counties = require('./counties')
 
 class CountyScreen extends React.Component {
@@ -31,15 +32,16 @@ class CountyScreen extends React.Component {
         
         return (
             <View>
-                <Text style={styles.text}>請選擇醫院，然後按Go</Text>
+                <Text style={styles.text}>請選擇縣市、醫院，然後按Go</Text>
+                <Text style={styles.text}>縣市</Text>
                 <Picker
                     selectedValue={this.state.countyId}
                     onValueChange={(itemValue, itemIndex) => this.setState({ countyId: itemValue })}>
                     {countyItems}
                 </Picker>
+                <Text style={styles.text}>醫院</Text>
                 <Picker
-                style={styles.picker}
-                itemStyle={styles.text}
+                    itemStyle={styles.text}
                     selectedValue={this.state.hospitalId}
                     onValueChange={(itemValue, itemIndex) => this.setState({ hospitalId: itemValue })}>
                     {hospitalItems}
@@ -49,19 +51,5 @@ class CountyScreen extends React.Component {
         );
     }
 };
-
-var styles = StyleSheet.create({
-    picker: {
-    },
-    button: {
-        backgroundColor: '#DDDDDD',
-        padding: 10,
-        alignItems: 'center'
-    },
-    text: {
-        backgroundColor: '#ffff00',
-        fontSize: 24
-    }
-})
 
 module.exports = CountyScreen

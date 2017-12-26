@@ -33,12 +33,23 @@ var dispFields = ["診間", "科別", "醫生", "看診號"]
 
 var keys = ["clinicNo", "division", "doctor", "visitNo"]
 
+import { connect } from "react-redux"
+@connect((store) => {
+  return {
+    store: store
+  };
+})
 class AnimalScreen extends React.Component {
+  static navigationOptions = {
+    headerTitle: '詳細資訊'
+  }
+  
   render() {
+    const {contentFontSize} = this.props.store.settings
     const {state} = this.props.navigation;
     var rows = [];
     for (var i = 0; i < keys.length; i++) {
-      rows.push(<Text key={i} style={styles.text}> {dispFields[i] + "：" + state.params.animal[keys[i]]}</Text>);
+      rows.push(<Text key={i} style={{fontSize: contentFontSize}}> {dispFields[i] + "：" + state.params.animal[keys[i]]}</Text>);
     }
 
     return (

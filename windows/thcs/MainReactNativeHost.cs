@@ -8,6 +8,18 @@ namespace thcs
 {
     class MainReactNativeHost : ReactNativeHost
     {
+        private CodePushReactPackage codePushReactPackage;
+        public MainReactNativeHost()
+        {
+            string cpKey;
+#if DEBUG
+            cpKey = "YourDeployKey";
+#else
+                cpKey = "YourDeployKey";
+#endif
+            codePushReactPackage = new CodePushReactPackage(cpKey, this);
+        }
+
         public override string MainComponentName => "thcs";
 
 #if !BUNDLE || DEBUG
@@ -19,19 +31,11 @@ namespace thcs
         protected override string JavaScriptMainModuleName => "index.windows";
 
 #if BUNDLE
-        private CodePushReactPackage codePushReactPackage;
         protected override string JavaScriptBundleFile
         {
             get
             {
                 //return "ms-appx:///ReactAssets/index.windows.bundle";
-                string cpKey;
-#if DEBUG
-                cpKey = "YourDeployKey";
-#else
-                cpKey = "YourDeployKey";
-#endif
-                codePushReactPackage = new CodePushReactPackage(cpKey, this);
                 return codePushReactPackage.GetJavaScriptBundleFile();
             }
         }
@@ -46,9 +50,9 @@ namespace thcs
                     new MainReactPackage(),
                     new ThcsReactPackage()
                 };
-#if BUNDLE
+//#if BUNDLE
                 rpl.Add(codePushReactPackage);
-#endif
+//#endif
                 return rpl;
             }
         }

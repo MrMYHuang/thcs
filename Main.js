@@ -31,27 +31,29 @@ var CodePush = require("react-native-code-push");
 
 import {
     TabNavigator
-  } from 'react-navigation';
+} from 'react-navigation';
 
 
 var HomeScreen = require('./HomeScreen');
+var SettingScreen = require('./SettingScreen');
 var About = require('./About');
 
 import { Provider } from "react-redux"
 import { getSavedStore, blankStore } from "./store"
 
-const MainNavigator = TabNavigator ({
-    Home: {screen: HomeScreen},
-    About: {screen: About}
-  }, {
-    tabBarPosition: 'bottom',
-    tabBarOptions: {
-        labelStyle: {
-          fontSize: 24,
-        }
-    },
-    lazy: true
-  });
+const MainNavigator = TabNavigator({
+    Home: { screen: HomeScreen },
+    Settings: { screen: SettingScreen },
+    About: { screen: About }
+}, {
+        tabBarPosition: 'bottom',
+        tabBarOptions: {
+            labelStyle: {
+                fontSize: 24,
+            }
+        },
+        lazy: true
+    });
 
 var styles = StyleSheet.create({
     container: {
@@ -70,7 +72,7 @@ var styles = StyleSheet.create({
 });
 
 var ProgressBar
-switch(Platform.OS ) {
+switch (Platform.OS) {
     case 'windows':
         ProgressBar = require('ProgressBarWindows'); break
     case 'android':
@@ -133,7 +135,7 @@ export class Main extends React.Component {
         return (
             <Provider store={this.savedStore}>
                 <View style={styles.container}>
-                <MainNavigator />
+                    <MainNavigator />
                     {this.state.showUpdateBar && <ProgressBar style={styles.toolbar} progress={this.state.updateProgress} />}
                 </View>
             </Provider>
@@ -159,8 +161,8 @@ export class Main2 extends React.Component {
 
 
 //if (!(__DEV__)) {
-    let codePushOptions = { checkFrequency: CodePush.CheckFrequency.ON_APP_START, updateDialog: CodePush.DEFAULT_UPDATE_DIALOG };
-    Main = CodePush(codePushOptions)(Main);
+let codePushOptions = { checkFrequency: CodePush.CheckFrequency.ON_APP_START, updateDialog: CodePush.DEFAULT_UPDATE_DIALOG };
+Main = CodePush(codePushOptions)(Main);
 //}
 
 //AppRegistry.registerComponent('thcs', () => Main);

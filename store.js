@@ -19,6 +19,13 @@ exports.getSavedStore = async () => {
         var savedStore = await LoadStoreFile()
         return createStore(reducer, savedStore, middleware)
     }
+
+    // Set setting default values.
+    blankStore.dispatch({
+        type: "SET_KEY_VAL",
+        key: "contentFontSize",
+        val: 48
+    })
     return blankStore
 }
 
