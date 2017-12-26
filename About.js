@@ -31,11 +31,11 @@ import HyperLink from './HyperLink'
 import { connect } from "react-redux"
 @connect((store) => {
   return {
-    animalDbDate: store.settings.animalDbDate
+    store: store
   };
 })
 class About extends React.Component {
-  static navigationOptions= {
+  static navigationOptions = {
     title: '關於'
   }
 
@@ -43,7 +43,6 @@ class About extends React.Component {
     const { animalDbDate } = this.props;
     return (
       <ScrollView>
-{(__DEV__) ? <Text>開發模式</Text> : null}
 <Text style={styles.text}>{`* 版本歷史：
 1.0.0:
   * 改善UI。

@@ -26,7 +26,7 @@ var {
     Text,
     Alert,
 } = ReactNative;
-
+import styles from './styles'
 var CodePush = require("react-native-code-push");
 
 import {
@@ -55,20 +55,12 @@ const MainNavigator = TabNavigator({
         lazy: true
     });
 
-var styles = StyleSheet.create({
+var styles2 = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
         backgroundColor: 'white',
-    },
-    navigator: {
-        flex: 1,
-        backgroundColor: 'white',
-    },
-    toolbar: {
-        backgroundColor: '#a9a9a9',
-        height: 56,
-    },
+    }
 });
 
 var ProgressBar
@@ -130,11 +122,11 @@ export class Main extends React.Component {
 
     render() {
         if (!this.state.storeInited)
-            return <Text>Loading...</Text>
+            return <Text style={styles.text}>Loading...</Text>
 
         return (
             <Provider store={this.savedStore}>
-                <View style={styles.container}>
+                <View style={styles2.container}>
                     <MainNavigator />
                     {this.state.showUpdateBar && <ProgressBar style={styles.toolbar} progress={this.state.updateProgress} />}
                 </View>
@@ -143,22 +135,21 @@ export class Main extends React.Component {
     }
 };
 
-/*
-export class Main2 extends React.Component {
-    
-        constructor(props) {
-            super(props);
-        }
-    
-        render() {
-    
-            return (
-                <Text>a</Text>
-            );
-        }
-    };
-    */
 
+export class Main2 extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+
+        return (
+            <Text>Test</Text>
+        );
+    }
+};
+Main2 = CodePush(codePushOptions)(Main2);
 
 //if (!(__DEV__)) {
 let codePushOptions = { checkFrequency: CodePush.CheckFrequency.ON_APP_START, updateDialog: CodePush.DEFAULT_UPDATE_DIALOG };
