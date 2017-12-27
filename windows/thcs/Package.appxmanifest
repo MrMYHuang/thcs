@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="40522Meng-YuanHuang.TaiwanHospitalClinicStatus" Publisher="CN=5190CF16-8C6F-4DE3-AD94-D8E3FBB2302B" Version="1.1.0.0" />
+  <Identity Name="40522Meng-YuanHuang.30069580A8FFB" Publisher="CN=5190CF16-8C6F-4DE3-AD94-D8E3FBB2302B" Version="1.1.0.0" />
   <mp:PhoneIdentity PhoneProductId="236eedce-b53f-45bb-b962-ceabb86c8f02" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>醫診進度</DisplayName>
