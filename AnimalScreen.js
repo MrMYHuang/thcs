@@ -48,7 +48,8 @@ class AnimalScreen extends React.Component {
   }
 
   render() {
-    const { contentFontSize, clinics, clinicNoSel } = this.props.store.settings
+    const { contentFontSize } = this.props.store.settings
+    const { clinics, clinicNoSel } = this.props.store.tmpSettings
     const { updateDb } = this.props.navigation.state.params;
 
     var rows = [];

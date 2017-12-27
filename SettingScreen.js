@@ -29,7 +29,7 @@ class SettingScreen extends React.Component {
             key: "contentFontSize",
             val: val
         })
-        await SaveStoreFile(this.props.store)
+        await SaveStoreFile(this.props.store.settings)
     }
 
     render() {

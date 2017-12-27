@@ -11,22 +11,31 @@ const middleware = applyMiddleware(promise(), thunk, logger)
 import { LoadStoreFile } from './StoreFile'
 import { NativeModules } from 'react-native'
 
-var blankStore = createStore(reducer, middleware)
+var savedStore
 
 var storeFile = 'ThcsSettings.json'
 exports.getSavedStore = async () => {
     if (await NativeModules.NativeLocalFile.FileExistAsync(storeFile)) {
-        var savedStore = await LoadStoreFile()
-        return createStore(reducer, savedStore, middleware)
+        var settings = await LoadStoreFile()
+        savedStore = createStore(reducer, { settings }, middleware)
+    }
+    else
+        savedStore = createStore(reducer, middleware)
+
+    // Setting default values.
+    var keys = ['contentFontSize', 'countyIdSel', 'hospitalIdSel']
+    var vals = [48, 0, 0]
+    var { settings } = savedStore.getState()
+    for (let k = 0; k < keys.length; k++) {
+        // Set default value if null.
+        if (settings[keys[k]] == null) {
+            savedStore.dispatch({
+                type: "SET_KEY_VAL",
+                key: keys[k],
+                val: vals[k]
+            })
+        }
     }
 
-    // Set setting default values.
-    blankStore.dispatch({
-        type: "SET_KEY_VAL",
-        key: "contentFontSize",
-        val: 48
-    })
-    return blankStore
+    return savedStore
 }
-
-exports.blankStore = blankStore

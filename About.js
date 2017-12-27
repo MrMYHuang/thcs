@@ -46,11 +46,12 @@ class About extends React.Component {
       <ScrollView style={styles.scrollView}>
 <Text style={styles.text}>{`* 版本歷史：
 1.1.0:
+  * 首頁選單支援記憶功能。
   * 改善UI排版。
 
-  1.0.0:
-  * 改善UI。
-  * 新增"設定"頁。
+1.0.0:
+* 改善UI。
+* 新增"設定"頁。
 
 0.2.0:
   * 支援CodePush方式更新app。

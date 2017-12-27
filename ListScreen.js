@@ -43,7 +43,6 @@ var AnimalCell = require('./AnimalCell');
 var LOADING = {};
 
 //import { NativeModules } from 'react-native'
-//import { SaveStoreFile } from './StoreFile'
 var getClinicStatus = require('./clinicStatus')
 import axios from 'axios'
 
@@ -56,8 +55,7 @@ if (Platform.OS == 'android')
 var animalFile = 'Animals.json'
 @connect((store) => {
   return {
-    store: store,
-    settings: store.settings
+    store: store
   };
 })
 class ListScreen extends React.Component {
@@ -125,10 +123,9 @@ class ListScreen extends React.Component {
           key: "animalDbDate",
           val: currTime.toLocaleDateString() + " " + currTime.toLocaleTimeString()
         })
-        //await SaveStoreFile(this.props.store)
         var clinics = getClinicStatus(hospital, res.data)
         await this.props.dispatch({
-          type: "SET_KEY_VAL",
+          type: "TMP_SET_KEY_VAL",
           key: "clinics",
           val: clinics.toArray()
         })
@@ -140,13 +137,13 @@ class ListScreen extends React.Component {
   showRandomList() {
     this.setState({ listType: 0,
       dataSource: this.state.dataSource.cloneWithRows(
-        this.props.store.settings.clinics
+        this.props.store.tmpSettings.clinics
       ) })
   }
 
   async selectAnimal(clinicNo: Object) {
     await this.props.dispatch({
-      type: "SET_KEY_VAL",
+      type: "TMP_SET_KEY_VAL",
       key: "clinicNoSel",
       val: clinicNo
     })
