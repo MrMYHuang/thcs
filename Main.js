@@ -33,7 +33,6 @@ import {
     TabNavigator
 } from 'react-navigation';
 
-
 var HomeScreen = require('./HomeScreen');
 var SettingScreen = require('./SettingScreen');
 var About = require('./About');
