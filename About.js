@@ -41,7 +41,6 @@ class About extends React.Component {
   }
 
   render() {
-    const { animalDbDate } = this.props;
     return (
       <ScrollView style={styles.scrollView}>
 <Text style={styles.text}>{`* 版本歷史：
@@ -76,8 +75,6 @@ class About extends React.Component {
       </ScrollView>
     );
   }
-  /*
-        <Text>  動物資料庫下載日期：{animalDbDate}</Text>*/
 }
 
 module.exports = About;

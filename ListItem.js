@@ -42,7 +42,7 @@ import { connect } from "react-redux"
     store: store
   };
 })
-class AnimalCell extends React.Component {
+class ListItem extends React.Component {
   render() {
     var { contentFontSize } = this.props.store.settings
     var rows = [];
@@ -64,4 +64,4 @@ class AnimalCell extends React.Component {
   }
 }
 
-module.exports = AnimalCell;
+module.exports = ListItem;

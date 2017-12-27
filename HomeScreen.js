@@ -1,6 +1,6 @@
 var CountyScreen = require('./CountyScreen');
 var ListScreen = require('./ListScreen');
-var AnimalScreen = require('./AnimalScreen');
+var DetailScreen = require('./DetailScreen');
 
 import {
     StackNavigator
@@ -9,7 +9,7 @@ import {
 const HomeScreen = StackNavigator ({
     County: {screen: CountyScreen},
     List: { screen: ListScreen },
-    Animal: {screen: AnimalScreen}
+    Detail: {screen: DetailScreen}
   }, {
     navigationOptions: {
       title: '首頁'

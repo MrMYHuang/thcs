@@ -42,7 +42,7 @@ import { connect } from "react-redux"
     store: store
   };
 })
-class AnimalScreen extends React.Component {
+class DetailScreen extends React.Component {
   static navigationOptions = {
     headerTitle: '詳細資訊'
   }

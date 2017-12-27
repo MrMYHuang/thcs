@@ -31,7 +31,7 @@ var {
 var invariant = require('fbjs/lib/invariant');
 var dismissKeyboard = require('dismissKeyboard');
 
-var AnimalCell = require('./AnimalCell');
+var ListItem = require('./ListItem');
 //var SearchBar = require('SearchBar');
 
 /**
@@ -52,7 +52,6 @@ var ProgressBar = require('ProgressBarWindows');
 if (Platform.OS == 'android')
   ProgressBar = require('ProgressBarAndroid')
 
-var animalFile = 'Animals.json'
 @connect((store) => {
   return {
     store: store
@@ -82,15 +81,7 @@ class ListScreen extends React.Component {
   }
 
   async initScreen() {
-    /*
-    if (await NativeModules.NativeLocalFile.FileExistAsync(animalFile)) {
-      var aDbStr = await NativeModules.NativeLocalFile.LoadStrAsync(animalFile)
-      this.animals = JSON.parse(aDbStr)
-      this.showRandomList()
-    }
-    else {*/
     await this.updateDb()
-    //}
   }
 
   async updateDb() {
@@ -111,12 +102,6 @@ class ListScreen extends React.Component {
 
     await axios.get(hospital.clinicStatusUrl, config)
       .then(async (res) => {
-        /*
-        await NativeModules.NativeLocalFile.SaveStrAsync(animalFile, JSON.stringify(res.data)).catch(err => {
-          console.log('Fail to save file.')
-        })
-        */
-
         var currTime = new Date()
         await this.props.dispatch({
           type: "TMP_SET_KEY_VAL",
@@ -143,13 +128,13 @@ class ListScreen extends React.Component {
     })
   }
 
-  async selectAnimal(clinicNo: Object) {
+  async selectDetail(clinicNo: Object) {
     await this.props.dispatch({
       type: "TMP_SET_KEY_VAL",
       key: "clinicNoSel",
       val: clinicNo
     })
-    this.props.navigation.navigate("Animal", { updateDb: this.updateDb.bind(this) })
+    this.props.navigation.navigate("Detail", { updateDb: this.updateDb.bind(this) })
   }
 
   renderFooter() {
@@ -182,8 +167,8 @@ class ListScreen extends React.Component {
     highlightRowFunc: (sectionID: ?number | string, rowID: ?number | string) => void,
   ) {
     return (
-      <AnimalCell
-        onSelect={() => this.selectAnimal(clinic.clinicNo)}
+      <ListItem
+        onSelect={() => this.selectDetail(clinic.clinicNo)}
         onHighlight={() => highlightRowFunc(sectionID, rowID)}
         onUnhighlight={() => highlightRowFunc(null, null)}
         clinic={clinic}
@@ -241,20 +226,18 @@ class ListScreen extends React.Component {
             this.refs.listview && this.refs.listview.getScrollResponder().scrollTo({ x: 0, y: 0 })}
         /> */
 
-class NoAnimals extends React.Component {
+class NoItem extends React.Component {
   render() {
     var text = '';
     if (this.props.filter) {
       text = `No results for "${this.props.filter}"`;
     } else if (!this.props.isLoading) {
-      // If we're looking at the latest animals, aren't currently loading, and
-      // still have no results, show a message
       text = 'Loading...';
     }
 
     return (
       <View style={styles2.container}>
-        <Text style={styles2.noAnimalsText}>{text}</Text>
+        <Text style={styles2.noItemText}>{text}</Text>
       </View>
     );
   }
@@ -269,7 +252,7 @@ var styles2 = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  noAnimalsText: {
+  noItemText: {
     marginTop: 80,
     color: '#888888',
   },
