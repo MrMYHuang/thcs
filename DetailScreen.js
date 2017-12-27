@@ -77,4 +77,4 @@ class DetailScreen extends React.Component {
   }
 }
 
-module.exports = AnimalScreen;
+module.exports = DetailScreen;
