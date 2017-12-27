@@ -44,6 +44,10 @@ class About extends React.Component {
     return (
       <ScrollView style={styles.scrollView}>
 <Text style={styles.text}>{`* 版本歷史：
+1.2.0:
+  * 支援更多醫院。
+  * 修正首頁選單切換縣市造成app閃退的問題。
+
 1.1.0:
   * 新增"上次更新"時間。
   * 首頁選單支援記憶功能。

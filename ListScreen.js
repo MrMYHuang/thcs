@@ -45,6 +45,8 @@ var LOADING = {};
 //import { NativeModules } from 'react-native'
 var getClinicStatus = require('./clinicStatus')
 import axios from 'axios'
+import iconv from 'iconv-lite';
+import { Buffer } from 'buffer';
 
 import { connect } from "react-redux"
 
@@ -86,6 +88,7 @@ class ListScreen extends React.Component {
 
   async updateDb() {
     let config = {
+      responseType: 'arraybuffer',
       onDownloadProgress: progressEvent => {
         let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
         this.setState({
@@ -108,7 +111,10 @@ class ListScreen extends React.Component {
           key: "dbUpdateDate",
           val: currTime.toLocaleDateString() + " " + currTime.toLocaleTimeString()
         })
-        var clinics = getClinicStatus(hospital, res.data)
+
+        var data = iconv.decode(new Buffer(res.data), hospital.csTableEnc);
+
+        var clinics = getClinicStatus(hospital, data)
         await this.props.dispatch({
           type: "TMP_SET_KEY_VAL",
           key: "clinics",

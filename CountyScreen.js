@@ -6,7 +6,8 @@ var {
     View,
     ScrollView,
     Picker,
-    TouchableHighlight
+    TouchableHighlight,
+    Linking
 } = ReactNative;
 
 import styles from './styles'
@@ -22,6 +23,15 @@ import { connect } from "react-redux"
 class CountyScreen extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    openClinicStatusPage() {
+        var { countyIdSel, hospitalIdSel } = this.props.store.settings
+        var hospital = counties[countyIdSel].hospitals[hospitalIdSel]
+        switch(hospital.csTableType) {
+            case 0: this.props.navigation.navigate("List", { hospital: hospital }); break
+            case 1: Linking.openURL(hospital.clinicStatusUrl); break
+        }
     }
 
     async changeIdSel(idSel, val) {
@@ -55,7 +65,9 @@ class CountyScreen extends React.Component {
                 <Picker
                     style={[styles.component]}
                     selectedValue={countyIdSel}
-                    onValueChange={(itemValue, itemIndex) => this.changeIdSel('countyIdSel', itemValue)}>
+                    onValueChange={async (itemValue, itemIndex) => {
+                        await this.changeIdSel('countyIdSel', itemValue)
+                        await this.changeIdSel('hospitalIdSel', 0)}}>
                     {countyItems}
                 </Picker>
 
@@ -63,12 +75,12 @@ class CountyScreen extends React.Component {
                 <Picker
                     style={[styles.component]}
                     selectedValue={hospitalIdSel}
-                    onValueChange={(itemValue, itemIndex) => this.changeIdSel('hospitalIdSel', itemValue)}>
+                    onValueChange={async (itemValue, itemIndex) => await this.changeIdSel('hospitalIdSel', itemValue)}>
                     {hospitalItems}
                 </Picker>
 
                 <TouchableHighlight style={[styles.component, styles.button]}
-                    onPress={() => this.props.navigation.navigate("List", { hospital: counties[countyIdSel].hospitals[hospitalIdSel] })}>
+                    onPress={this.openClinicStatusPage.bind(this)}>
                     <Text style={styles.text}>Go</Text>
                 </TouchableHighlight>
             </ScrollView>
