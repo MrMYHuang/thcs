@@ -4,13 +4,16 @@ var {
   } = ReactNative;
 
 var styles = StyleSheet.create({
+  component: {
+    margin: 5
+  },
   text: {
     fontSize: 24
   },
   button: {
     backgroundColor: '#DDDDDD',
     padding: 10,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   listRow: {
     alignItems: 'center',
@@ -21,6 +24,10 @@ var styles = StyleSheet.create({
   itemText: {
     flex: 1,
     textAlign: 'center'
+  },
+  scrollView: {
+    marginLeft: 30,
+    marginRight: 30
   }
 });
 

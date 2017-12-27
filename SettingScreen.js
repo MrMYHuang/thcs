@@ -8,6 +8,7 @@ var {
     View
 } = ReactNative;
 
+import styles from './styles'
 import { SaveStoreFile } from './StoreFile'
 
 import { connect } from "react-redux"
@@ -34,7 +35,7 @@ class SettingScreen extends React.Component {
     render() {
         var { contentFontSize } = this.props.settings;
         return (
-            <ScrollView>
+            <ScrollView style={styles.scrollView}>
                 <Text style={styles.text}>文字大小</Text>
                 <Slider
                 minimumValue={10} maximumValue={64} step={1} value={contentFontSize}
@@ -45,11 +46,5 @@ class SettingScreen extends React.Component {
         );
     }
 }
-
-var styles = StyleSheet.create({
-    text: {
-        fontSize: 24
-    }
-});
 
 module.exports = SettingScreen;

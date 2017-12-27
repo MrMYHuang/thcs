@@ -26,6 +26,7 @@ var {
   Linking
 } = ReactNative;
 
+import styles from './styles'
 import HyperLink from './HyperLink'
 
 import { connect } from "react-redux"
@@ -42,9 +43,12 @@ class About extends React.Component {
   render() {
     const { animalDbDate } = this.props;
     return (
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
 <Text style={styles.text}>{`* 版本歷史：
-1.0.0:
+1.1.0:
+  * 改善UI排版。
+
+  1.0.0:
   * 改善UI。
   * 新增"設定"頁。
 
@@ -71,21 +75,7 @@ class About extends React.Component {
     );
   }
   /*
-        <Text>* 版權宣告：</Text>
-        <Text>  動物資料來源：<HyperLink>http://data.gov.tw/node/9842</HyperLink></Text>
         <Text>  動物資料庫下載日期：{animalDbDate}</Text>*/
 }
-
-var styles = StyleSheet.create({
-  text: {
-    fontSize: 24
-  },
-  imgContainer: {
-    flex: 1,
-  },
-  textContainer: {
-    flex: 2,
-  }
-});
 
 module.exports = About;

@@ -4,6 +4,7 @@ var {
   StyleSheet,
     Text,
     View,
+    ScrollView,
     Picker,
     TouchableHighlight
 } = ReactNative;
@@ -31,23 +32,24 @@ class CountyScreen extends React.Component {
         }
         
         return (
-            <View>
-                <Text style={styles.text}>請選擇縣市、醫院，然後按Go</Text>
-                <Text style={styles.text}>縣市</Text>
+            <ScrollView style={styles.scrollView}>
+                <Text style={[styles.component, styles.text]}>請選擇縣市、醫院，然後按Go</Text>
+                <Text style={[styles.component, styles.text]}>縣市</Text>
                 <Picker
+                    style={[styles.component]}
                     selectedValue={this.state.countyId}
                     onValueChange={(itemValue, itemIndex) => this.setState({ countyId: itemValue })}>
                     {countyItems}
                 </Picker>
-                <Text style={styles.text}>醫院</Text>
+                <Text style={[styles.component, styles.text]}>醫院</Text>
                 <Picker
-                    itemStyle={styles.text}
+                    style={[styles.component]}
                     selectedValue={this.state.hospitalId}
                     onValueChange={(itemValue, itemIndex) => this.setState({ hospitalId: itemValue })}>
                     {hospitalItems}
                 </Picker>
-                <TouchableHighlight style={styles.button} onPress={() => this.props.navigation.navigate("List", {hospital: counties[this.state.countyId].hospitals[this.state.hospitalId]})}><Text style={styles.text}>Go</Text></TouchableHighlight>
-            </View>
+                <TouchableHighlight style={[styles.component, styles.button]} onPress={() => this.props.navigation.navigate("List", {hospital: counties[this.state.countyId].hospitals[this.state.hospitalId]})}><Text style={styles.text}>Go</Text></TouchableHighlight>
+            </ScrollView>
         );
     }
 };
