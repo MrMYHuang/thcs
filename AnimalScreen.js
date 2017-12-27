@@ -49,7 +49,7 @@ class AnimalScreen extends React.Component {
 
   render() {
     const { contentFontSize } = this.props.store.settings
-    const { clinics, clinicNoSel } = this.props.store.tmpSettings
+    const { clinics, clinicNoSel, dbUpdateDate } = this.props.store.tmpSettings
     const { updateDb } = this.props.navigation.state.params;
 
     var rows = [];
@@ -64,6 +64,7 @@ class AnimalScreen extends React.Component {
 
     return (
       <ScrollView contentContainerStyle={{ flex: 1 }}>
+        <Text style={styles.updateDate}>上次更新：{dbUpdateDate}</Text>
         <View style={{ flex: 1 }}>
           {rows}
         </View>

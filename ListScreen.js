@@ -119,8 +119,8 @@ class ListScreen extends React.Component {
 
         var currTime = new Date()
         await this.props.dispatch({
-          type: "SET_KEY_VAL",
-          key: "animalDbDate",
+          type: "TMP_SET_KEY_VAL",
+          key: "dbUpdateDate",
           val: currTime.toLocaleDateString() + " " + currTime.toLocaleTimeString()
         })
         var clinics = getClinicStatus(hospital, res.data)
@@ -135,10 +135,12 @@ class ListScreen extends React.Component {
   }
 
   showRandomList() {
-    this.setState({ listType: 0,
+    this.setState({
+      listType: 0,
       dataSource: this.state.dataSource.cloneWithRows(
         this.props.store.tmpSettings.clinics
-      ) })
+      )
+    })
   }
 
   async selectAnimal(clinicNo: Object) {
@@ -211,9 +213,11 @@ class ListScreen extends React.Component {
       />;
 
     var { contentFontSize } = this.props.store.settings
+    var { dbUpdateDate } = this.props.store.tmpSettings
     return (
       < View style={styles2.container} >
         <View style={styles2.container2}>
+          <Text style={styles.updateDate}>上次更新：{dbUpdateDate}</Text>
           <View style={styles.listRow}>
             <Text style={[{ fontSize: contentFontSize }, styles.itemText]}>醫生</Text>
             <Text style={[{ fontSize: contentFontSize }, styles.itemText]}>看診號</Text>
