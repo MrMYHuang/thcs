@@ -63,16 +63,16 @@ class DetailScreen extends React.Component {
     }
 
     return (
-      <ScrollView contentContainerStyle={{ flex: 1 }}>
-        <Text style={styles.updateDate}>上次更新：{dbUpdateDate}</Text>
-        <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <Text style={styles.updateDate}>上次更新：{dbUpdateDate}</Text>
           {rows}
-        </View>
+        </ScrollView>
         <TouchableHighlight style={styles.button}
           onPress={updateDb}>
           <Text style={styles.text}>刷新</Text>
         </TouchableHighlight>
-      </ScrollView>
+      </View>
     );
   }
 }

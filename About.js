@@ -44,7 +44,10 @@ class About extends React.Component {
     return (
       <ScrollView style={styles.scrollView}>
 <Text style={styles.text}>{`* 版本歷史：
-1.3.0:
+1.4.0 (JS), 1.2.0 (native):
+  * 新增"亞東紀念醫院"、"中國醫藥大學附設醫院"、"中山醫學大學附設醫院"、"彰化基督教醫院"、"奇美醫院"、"高醫醫院"、"慈濟醫院"。
+
+1.3.0 (JS), 1.2.0 (native):
   * 新增"三軍總醫院台北門診中心"、"萬芳醫院"、"新光吳火獅紀念醫院"。
 
 1.2.0:

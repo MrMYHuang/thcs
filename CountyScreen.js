@@ -31,6 +31,7 @@ class CountyScreen extends React.Component {
         switch(hospital.csTableType) {
             case 0:
             case 2:
+            case 3:
             this.props.navigation.navigate("List", { hospital: hospital }); break
             case 1: Linking.openURL(hospital.clinicStatusUrl); break
         }

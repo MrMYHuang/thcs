@@ -1,6 +1,6 @@
 module.exports = {
     name: '醫院',
-    clinicStatusUrl: 'http://',
+    clinicStatusUrl: 'http',
     csTableType: 0,
     csTableEnc: 'utf-8',
     csTableSelector: '#gvClinicStatus',
