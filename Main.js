@@ -79,11 +79,16 @@ export class Main extends React.Component {
         // because it contains async calls.
         // We use storeInited for working around this issue.
         this.state = {
+            updateMsg: '',
             showUpdateBar: false,
             updateProgress: 0,
             storeInited: false,
         }
         this.useSavedStore()
+    }
+
+    componentDidMount() {
+        CodePush.notifyApplicationReady()
     }
 
     async useSavedStore() {
@@ -93,22 +98,22 @@ export class Main extends React.Component {
 
     codePushStatusDidChange(status) {
         switch (status) {
-            /*
+            
             case CodePush.SyncStatus.CHECKING_FOR_UPDATE:
-              console.log("Checking for updates.");
+              this.setState({updateMsg: "Checking for updates."})
               break;
             case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
-              console.log("Downloading package.");
+              this.setState({updateMsg: "Downloading package."})
               break;
             case CodePush.SyncStatus.INSTALLING_UPDATE:
-              console.log("Installing update.");
+              this.setState({updateMsg: "Installing update."})
               break;
             case CodePush.SyncStatus.UP_TO_DATE:
-              console.log("Up-to-date.");
+              this.setState({updateMsg: "Up-to-date."})
               break;
-            */
+            
             case CodePush.SyncStatus.UPDATE_INSTALLED:
-                Alert.alert("下載更新完成", "請重新啟動app。")
+            this.setState({updateMsg: "下載更新完成, 請重新啟動app。"})
                 break;
         }
     }
@@ -127,14 +132,15 @@ export class Main extends React.Component {
             <Provider store={this.savedStore}>
                 <View style={styles2.container}>
                     <MainNavigator />
-                    {this.state.showUpdateBar && <ProgressBar style={styles.toolbar} progress={this.state.updateProgress} />}
+                    {this.state.showUpdateBar && <ProgressBar style={{height: 50}} progress={this.state.updateProgress} />}
+                    <Text>{this.state.updateMsg}</Text>
                 </View>
             </Provider>
         );
     }
 };
 
-
+/*
 export class Main2 extends React.Component {
 
     constructor(props) {
@@ -148,7 +154,7 @@ export class Main2 extends React.Component {
         );
     }
 };
-Main2 = CodePush(codePushOptions)(Main2);
+Main2 = CodePush(codePushOptions)(Main2);*/
 
 //if (!(__DEV__)) {
 let codePushOptions = { checkFrequency: CodePush.CheckFrequency.ON_APP_START, updateDialog: CodePush.DEFAULT_UPDATE_DIALOG };
