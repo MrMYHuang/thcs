@@ -11,6 +11,9 @@ module.exports = [
         hospitals: [
             require('./hospitals/ntuh'),
             require('./hospitals/vghtpe'),
+            require('./hospitals/tpoc.tsgh'),
+            require('./hospitals/skh'),
+            require('./hospitals/wanfang'),
         ]
     },
 

@@ -29,7 +29,9 @@ class CountyScreen extends React.Component {
         var { countyIdSel, hospitalIdSel } = this.props.store.settings
         var hospital = counties[countyIdSel].hospitals[hospitalIdSel]
         switch(hospital.csTableType) {
-            case 0: this.props.navigation.navigate("List", { hospital: hospital }); break
+            case 0:
+            case 2:
+            this.props.navigation.navigate("List", { hospital: hospital }); break
             case 1: Linking.openURL(hospital.clinicStatusUrl); break
         }
     }
