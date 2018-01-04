@@ -32,9 +32,9 @@ var getStyleFromScore = require('./getStyleFromScore');
 var getTextFromScore = require('./getTextFromScore');
 
 
-var dispFields = ["診間", "科別", "醫生", "看診號"]
+var dispFields = ["診間", "醫生", "診號", "科別"]
 
-var keys = ["clinicNo", "division", "doctor", "visitNo"]
+var keys = ["clinicNo", "doctor", "visitNo", "division"]
 
 import { connect } from "react-redux"
 @connect((store) => {
@@ -52,11 +52,13 @@ class DetailScreen extends React.Component {
     const { clinics, clinicNoSel, dbUpdateDate } = this.props.store.tmpSettings
     const { updateDb } = this.props.navigation.state.params;
 
-    var rows = [];
+    var rows = []
     for (var c = 0; c < clinics.length; c++) {
       if (clinics[c].clinicNo == clinicNoSel) {
         for (var i = 0; i < keys.length; i++) {
-          rows.push(<Text key={i} style={{ fontSize: contentFontSize }}> {dispFields[i] + "：" + clinics[c][keys[i]]}</Text>);
+          rows.push(<Text key={i} style={{ fontSize: contentFontSize }}>
+          {dispFields[i] + "：" + clinics[c][keys[i]]}
+          </Text>)
         }
         break
       }

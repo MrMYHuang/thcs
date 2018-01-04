@@ -44,7 +44,10 @@ class About extends React.Component {
     return (
       <ScrollView style={{marginLeft: 5, marginRight: 5}}>
 <Text style={styles.text}>{`* 版本歷史：
-1.5.0 (JS), 1.4.0 (native):
+1.5.1 (JS), 1.4.0 (native):
+  * 變更"詳細資訊"頁欄位順序。
+
+  1.5.0 (JS), 1.4.0 (native):
   * 看診室進度列表頁新增"原網頁"按鈕。
 
 1.4.0 (JS), 1.4.0 (native):
