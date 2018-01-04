@@ -26,6 +26,7 @@ var {
   Text,
   View,
   TouchableHighlight,
+  Linking,
 } = ReactNative;
 
 var invariant = require('fbjs/lib/invariant');
@@ -184,6 +185,9 @@ class ListScreen extends React.Component {
   }
 
   render() {
+    const { state } = this.props.navigation
+    var hospital = state.params.hospital
+
     var content
     if (this.state.isDownloading == true)
       content = <View style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: 'center' }}>
@@ -215,10 +219,16 @@ class ListScreen extends React.Component {
           </View>
           {content}
         </View>
-        <TouchableHighlight style={styles.button}
+        <View style={{flexDirection: 'row'}}>
+        <TouchableHighlight style={[styles.button, {flex: 1}]}
+          onPress={() => Linking.openURL(hospital.clinicStatusUrl)}>
+          <Text style={styles.text}>原網頁</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={[styles.button, {flex: 1}]}
           onPress={this.updateDb.bind(this)}>
           <Text style={styles.text}>刷新</Text>
         </TouchableHighlight>
+        </View>
       </View >
     )
   }

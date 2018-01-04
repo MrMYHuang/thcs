@@ -42,8 +42,11 @@ class About extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.scrollView}>
+      <ScrollView style={{marginLeft: 5, marginRight: 5}}>
 <Text style={styles.text}>{`* 版本歷史：
+1.5.0 (JS), 1.4.0 (native):
+  * 看診室進度列表頁新增"原網頁"按鈕。
+
 1.4.0 (JS), 1.4.0 (native):
   * 修正react-native-code-push 5.2.1 bug，使UWP只能CodePush成功一次。
   * 首頁底部顯示CodePush更新狀態。

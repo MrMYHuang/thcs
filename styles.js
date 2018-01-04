@@ -17,7 +17,7 @@ var styles = StyleSheet.create({
   button: {
     backgroundColor: '#DDDDDD',
     padding: 10,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   listRow: {
     alignItems: 'center',

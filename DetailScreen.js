@@ -64,7 +64,7 @@ class DetailScreen extends React.Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <ScrollView>
+        <ScrollView style={{flex: 1}}>
           <Text style={styles.updateDate}>上次更新：{dbUpdateDate}</Text>
           {rows}
         </ScrollView>
