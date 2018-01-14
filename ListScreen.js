@@ -46,7 +46,7 @@ var LOADING = {};
 //import { NativeModules } from 'react-native'
 var getClinicStatus = require('./clinicStatus')
 import axios from 'axios'
-import iconv from 'iconv-lite';
+import iconv from 'iconv-lite-myh';
 import { Buffer } from 'buffer';
 
 import { connect } from "react-redux"

@@ -10,17 +10,18 @@
     "cpp_uwp": "appcenter codepush promote -a myh/thcs-uwp -s Staging -d Production",
     "cps_and": "appcenter codepush release-react -a myh/thcs-android",
     "cpp_and": "appcenter codepush promote -a myh/thcs-android -s Staging -d Production",
-    "build_apk": "cd android && gradlew assembleRelease",
-    "install_apk": "adb install ./android/app/build/outputs/apk/release/app-release.apk"
+    "debug_and": "react-native run-android",
+    "build_and": "cd android && gradlew assembleRelease",
+    "install_and": "adb install ./android/app/build/outputs/apk/release/app-release.apk"
   },
   "dependencies": {
     "axios": "^0.17.1",
     "babel-core": "^7.0.0-beta.3",
     "buffer": "^5.0.8",
     "cheerio-without-node-native": "^0.20.2",
-    "iconv-lite": "^0.4.19",
-    "react": "16.0.0",
-    "react-native": "~0.51.0",
+    "iconv-lite-myh": "^0.4.21",
+    "react": "16.2.0",
+    "react-native": "~0.52.0",
     "react-native-code-push": "^5.2.1",
     "react-native-windows": "^0.51.0-rc.0",
     "react-navigation": "^1.0.0-beta.22",
@@ -33,15 +34,12 @@
     "stream": "^0.0.2"
   },
   "devDependencies": {
-    "babel-jest": "22.0.4",
+    "babel-jest": "22.0.6",
     "babel-plugin-transform-decorators": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-react-native": "4.0.0",
-    "jest": "22.0.4",
-    "rnpm-plugin-windows": "^0.2.8",
-    "tslint": "^5.8.0",
-    "typescript": "^2.6.2",
-    "typings": "^2.1.1"
+    "jest": "22.0.6",
+    "rnpm-plugin-windows": "^0.2.8"
   },
   "jest": {
     "preset": "react-native"
