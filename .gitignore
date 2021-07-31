@@ -59,3 +59,5 @@ fastlane/screenshots
 *.png
 *.appx
 *.jar
+pwa
+build

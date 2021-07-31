@@ -1,0 +1,29 @@
+{
+  "short_name": "醫診進度",
+  "name": "醫診進度",
+  "icons": [
+    {
+      "src": "assets/icon/icon.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
+    },
+    {
+      "src": "assets/icon/icon.png",
+      "type": "image/png",
+      "sizes": "1024x1024",
+      "purpose": "maskable"
+    }
+  ],
+  "scope": "/thcs/",
+  "start_url": "/thcs/",
+  "display": "standalone",
+  "shortcuts": [
+    {
+      "name": "醫院列表",
+      "url": "/thcs/county",
+      "icons": [{ "src": "assets/icon/icon.png", "sizes": "512x512" }]
+    }
+  ],
+  "theme_color": "black",
+  "background_color": "black"
+}

@@ -1,0 +1,13 @@
+.CountyScreenBlock {
+    margin: 40px 0;
+}
+
+.CountyScreenSelectWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.CountyScreenSelect {
+    border: 2px solid var(--ion-color-primary);
+    width: 90%;
+}
