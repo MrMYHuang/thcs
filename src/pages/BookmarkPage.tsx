@@ -1,10 +1,10 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonReorderGroup, IonReorder, IonItem, IonLabel, withIonLifeCycle, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonButton, IonToast, IonLoading } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonReorderGroup, IonReorder, IonItem, IonLabel, withIonLifeCycle, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonButton, IonToast } from '@ionic/react';
 import { ItemReorderEventDetail } from '@ionic/core';
 import { RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Bookmark } from '../models/Bookmark';
-import { refresh, swapVertical } from 'ionicons/icons';
+import { swapVertical } from 'ionicons/icons';
 import Globals from '../Globals';
 import { Settings } from '../models/Settings';
 import { TmpSettings } from '../models/TmpSettings';
