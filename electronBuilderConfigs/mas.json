@@ -1,6 +1,6 @@
 {
   "extends": null,
-  "appId": "io.github.myhpwa.thcs",
+  "appId": "com.thcs",
   "files": [
     "buildElectron/**/*",
     "package.json"
