@@ -23,7 +23,6 @@ interface Props {
   voiceURI: string;
   speechRate: number;
   mainVersion: string | null;
-  cbetaOfflineDbMode: boolean;
 }
 
 interface PageProps extends Props, RouteComponentProps<{
@@ -208,7 +207,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
                     val: value,
                   });
                 }}>
-                <IonSelectOption className='uiFont cbeta' value={0}>綠底</IonSelectOption>
+                <IonSelectOption className='uiFont green' value={0}>綠底</IonSelectOption>
                 <IonSelectOption className='uiFont dark' value={1}>暗色</IonSelectOption>
                 <IonSelectOption className='uiFont light' value={2}>亮色</IonSelectOption>
                 <IonSelectOption className='uiFont oldPaper' value={3}>舊書</IonSelectOption>

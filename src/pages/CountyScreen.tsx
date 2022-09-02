@@ -81,7 +81,7 @@ class _CountyScreen extends React.Component<PageProps, State> {
                     </IonToolbar>
                 </IonHeader>
                 <IonContent style={{ textAlign: 'center' }}>
-                    <IonLabel className='uiFont'>請選擇縣市、醫院，然後按Go</IonLabel>
+                    <IonLabel className='uiFont'>請選擇縣市、醫院，然後按 Go</IonLabel>
 
                     <div className='CountyScreenBlock'>
                         <IonLabel className='uiFont'>縣市</IonLabel>

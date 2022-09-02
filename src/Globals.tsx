@@ -72,7 +72,13 @@ function disableAppLog() {
 
 function copyToClipboard(text: string) {
   try {
-    navigator.clipboard && navigator.clipboard.writeText(text);
+    if (navigator.permissions) {
+      navigator.permissions.query({ name: 'clipboard-read' } as any).then(() => {
+        navigator.clipboard.writeText(text);
+      });
+    } else {
+      navigator.clipboard && navigator.clipboard.writeText(text);
+    }
   } catch (error) {
     console.error(error);
   }

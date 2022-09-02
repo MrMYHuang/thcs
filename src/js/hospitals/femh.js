@@ -1,6 +1,6 @@
 module.exports = {
     name: '亞東紀念醫院',
-    clinicStatusUrl: 'https://hos.femh.org.tw/newfemh/mobile/mvisit.aspx',
+    clinicStatusUrl: 'https://www.femh.org.tw/visit/visit?Action=9',
     csTableType: 1,
     csTableSelector: '',
     csFieldIds: []
