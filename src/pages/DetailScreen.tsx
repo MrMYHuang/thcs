@@ -79,8 +79,7 @@ class _DetailScreen extends React.Component<PageProps, State> {
   }
 
   render() {
-
-    var rows = []
+    var rows = [];
     for (var i = 0; i < keys.length; i++) {
       rows.push(<IonItem key={i} className='textFont'>
         {dispFields[i] + "：" + (this.clinic as any)[keys[i]]}
@@ -118,7 +117,7 @@ class _DetailScreen extends React.Component<PageProps, State> {
           </IonToolbar>
         </IonHeader>
         <IonContent style={{ textAlign: 'center' }}>
-          <IonLabel className='updateDate'>上次更新：{this.props.tmpSettings.dbUpdateDate}</IonLabel>
+          <IonLabel className='uiFont'>上次更新：{this.props.tmpSettings.dbUpdateDate}</IonLabel>
           <IonList>
             {rows}
           </IonList>

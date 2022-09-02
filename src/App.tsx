@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect, Route, RouteComponentProps, withRouter } from 'react-router-dom';
 import {
-  setupConfig,
   IonApp,
   IonIcon,
   IonRouterOutlet,
@@ -10,6 +9,7 @@ import {
   IonTabs,
   IonAlert,
   IonToast,
+  setupIonicReact,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { connect, Provider } from 'react-redux';
@@ -61,12 +61,13 @@ class DebugRouter extends IonReactRouter {
 }
 */
 
-setupConfig({
+setupIonicReact({
   mode: 'md', // Use a consistent UI style across Android and iOS.
   swipeBackEnabled: false,
 });
 
 export var serviceWorkCallbacks = {
+  onLoad: function (registration: ServiceWorkerRegistration) { },
   onSuccess: function (registration: ServiceWorkerRegistration) { },
   onUpdate: function (registration: ServiceWorkerRegistration) { },
 };
@@ -208,7 +209,7 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
       } else {
         console.error('navigator.wakeLock is undefined.');
       }
-    } catch (err) {
+    } catch (err: any) {
       // the wake lock request fails - usually system related, such low as battery
       console.log(`${err.name}, ${err.message}`);
       console.log(new Error().stack);

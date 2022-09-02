@@ -10,10 +10,6 @@ var styles = StyleSheet.create({
   text: {
     fontSize: 24
   },
-  updateDate: {
-    fontSize: 16,
-    textAlign: 'center'
-  },
   button: {
     backgroundColor: '#DDDDDD',
     padding: 10,

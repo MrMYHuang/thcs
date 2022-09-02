@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonReorderGroup, IonReorder, IonItem, IonLabel, withIonLifeCycle, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonButton, IonToast } from '@ionic/react';
 import { ItemReorderEventDetail } from '@ionic/core';
 import { RouteComponentProps } from 'react-router-dom';
@@ -79,15 +79,15 @@ class _BookmarkPage extends React.Component<PageProps, State> {
 
   getBookmarkRows() {
     let bookmarks = this.props.bookmarks;
-    let rows = Array<object>();
+    let rows: ReactNode[] = [];
     bookmarks.forEach((bookmark, i) => {
       let label = `${bookmark.title}`;
       rows.push(
         <IonItemSliding key={`bookmarkItemSliding_` + i}>
           <IonItem key={`bookmarkItem_` + i} button={true}
-          onClick={e =>
-            this.props.history.push(bookmark.url)
-          }>
+            onClick={e =>
+              this.props.history.push(bookmark.url)
+            }>
             <div tabIndex={0}></div>{/* Workaround for macOS Safari 14 bug. */}
             <IonLabel className='ion-text-wrap uiFont' key={`bookmarkItemLabel_` + i}>
               {label}

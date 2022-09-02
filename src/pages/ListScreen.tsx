@@ -120,19 +120,24 @@ class _ListScreen extends React.Component<PageProps, State> {
           </IonToolbar>
         </IonHeader>
         <IonContent style={{ textAlign: 'center' }}>
-          <IonLabel>上次更新：{this.props.tmpSettings.dbUpdateDate}</IonLabel>
+          <div className='container'>
+            <div className='scrollableContent'>
+              {content}
+            </div>
 
-          {content}
-
-          <div className='bottomButtonRow'>
-            <IonButton className='uiFont' fill='outline' shape='round' size='large'
-              onClick={(e) => window.open(this.hospital.clinicStatusUrl)}>
-              原網頁
-            </IonButton>
-            <IonButton className='uiFont' fill='outline' shape='round' size='large'
-              onClick={() => this.updateClinics()}>
-              刷新
-            </IonButton>
+            <div className='bottomButtonRow'>
+              <IonButton className='uiFont' fill='outline' shape='round' size='large'
+                onClick={(e) => window.open(this.hospital.clinicStatusUrl)}>
+                原網頁
+              </IonButton>
+              <IonButton className='uiFont' fill='outline' shape='round' size='large'
+                onClick={() => this.updateClinics()}>
+                刷新
+              </IonButton>
+              <div>
+                <IonLabel className='uiFont'>上次更新：{this.props.tmpSettings.dbUpdateDate}</IonLabel>
+              </div>
+            </div>
           </div>
 
           <IonToast
