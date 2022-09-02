@@ -3,9 +3,10 @@
   "homepage": "/thcs",
   "productName": "醫診進度",
   "pwaVersion": "2.0.0",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "license": "MIT",
   "keywords": [
+    "醫診進度",
     "診間進度",
     "醫院"
   ],
